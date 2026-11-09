@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2457d6" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%232457d6'/%3E%3Cpath d='M10 20h20M20 10v20' stroke='white' stroke-width='4'/%3E%3C/svg%3E"
+    />
+    <meta
+      name="description"
+      content="Небольшая игра: соберите заданную сумму из трёх разных чисел."
+    />
+    <title>Собери сумму</title>
+  </head>
+  <body>
+    <main class="game">
+      <header class="heading">
+        <p class="eyebrow">Числовая головоломка</p>
+        <h1>Собери <span>сумму.</span></h1>
+        <p>Три разных числа. Одна точная сумма.</p>
+      </header>
+
+      <section class="board" aria-label="Игровое поле">
+        <div class="scoreboard">
+          <div class="target">
+            <span>Ваша цель</span>
+            <strong id="target">—</strong>
+          </div>
+          <div class="current">
+            <span>Сейчас в сумме</span>
+            <strong id="sum">0</strong>
+            <span id="count">Выбрано 0 из 3</span>
+          </div>
+        </div>
+
+        <div class="selection">
+          <h2>Ваши числа <span>от 1 до 9</span></h2>
+          <ul id="numbers" aria-label="Выбранные числа"></ul>
+          <p id="empty" class="empty">
+            Здесь появятся ваши числа.<br />Ненужное можно удалить.
+          </p>
+        </div>
+
+        <form id="number-form" novalidate>
+          <label for="number-input">Какое число добавим?</label>
+          <div class="input-row">
+            <input
+              id="number-input"
+              name="number"
+              type="text"
+              inputmode="numeric"
+              autocomplete="off"
+              maxlength="20"
+              placeholder="Например, 5"
+              aria-describedby="message"
+            />
+            <button id="add-button" type="submit">
+              Добавить <span aria-hidden="true">+</span>
+            </button>
+          </div>
+        </form>
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+
+        <footer class="board-footer">
+          <span>Прогресс сохраняется автоматически</span>
+          <button id="new-game" class="secondary" type="button">
+            Новая игра
+          </button>
+        </footer>
+      </section>
+
+      <aside class="rules" aria-labelledby="rules-title">
+        <h2 id="rules-title">Как играть</h2>
+        <p>
+          Добавьте ровно три разных целых числа от 1 до 9. Их сумма должна
+          совпасть с целью. Не получилось? Удалите любое число и попробуйте
+          другое.
+        </p>
+      </aside>
+      <noscript>Для игры нужно включить JavaScript в браузере.</noscript>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
