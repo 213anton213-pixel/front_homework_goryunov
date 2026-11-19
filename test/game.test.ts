@@ -6,7 +6,7 @@ import {
   isWon,
   addNumber,
   removeNumber,
-} from '../src/game.js';
+} from '../src/game.ts';
 
 test('новая игра начинается с достижимой целью и пустым списком', () => {
   const state = createGame();

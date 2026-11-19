@@ -1,4 +1,15 @@
-export function createGame() {
+export type GameState = {
+  target: number;
+  numbers: readonly number[];
+  draft: string;
+};
+
+export type GameResult = {
+  state: GameState;
+  message: string;
+};
+
+export function createGame(): GameState {
   return {
     target: Math.floor(Math.random() * 19) + 6,
     numbers: [],
@@ -6,15 +17,15 @@ export function createGame() {
   };
 }
 
-export function getSum(numbers) {
+export function getSum(numbers: readonly number[]): number {
   return numbers.reduce((sum, number) => sum + number, 0);
 }
 
-export function isWon(state) {
+export function isWon(state: Pick<GameState, 'target' | 'numbers'>): boolean {
   return state.numbers.length === 3 && getSum(state.numbers) === state.target;
 }
 
-export function addNumber(state) {
+export function addNumber(state: GameState): GameResult {
   if (isWon(state)) {
     return { state, message: 'Вы уже победили! Начните новую игру.' };
   }
@@ -38,7 +49,7 @@ export function addNumber(state) {
     };
   }
 
-  const nextState = {
+  const nextState: GameState = {
     ...state,
     numbers: [...state.numbers, number],
     draft: '',
@@ -55,7 +66,7 @@ export function addNumber(state) {
   return { state: nextState, message };
 }
 
-export function removeNumber(state, number) {
+export function removeNumber(state: GameState, number: number): GameState {
   return {
     ...state,
     numbers: state.numbers.filter((item) => item !== number),

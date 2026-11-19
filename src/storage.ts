@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { createGame } from './game.js';
+import { createGame } from './game.ts';
+import type { GameState } from './game.ts';
 
 export const SAVE_KEY = 'sum-game';
 
@@ -14,9 +15,9 @@ const gameSchema = z
   })
   .strict();
 
-export function loadGame() {
+export function loadGame(): GameState {
   try {
-    const saved = JSON.parse(localStorage.getItem(SAVE_KEY));
+    const saved: unknown = JSON.parse(localStorage.getItem(SAVE_KEY) ?? 'null');
     const result = gameSchema.safeParse(saved);
 
     return result.success ? result.data : createGame();
@@ -25,7 +26,7 @@ export function loadGame() {
   }
 }
 
-export function saveGame(state) {
+export function saveGame(state: GameState): void {
   try {
     localStorage.setItem(SAVE_KEY, JSON.stringify(state));
   } catch {
